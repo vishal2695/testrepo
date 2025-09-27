@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Developer Skills</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background: #333;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            display: block;
+        }
+        nav a:hover {
+            background: #575757;
+        }
+        .container {
+            padding: 2rem;
+        }
+        h2 {
+            color: #333;
+        }
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .skill-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        .skill-card h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Python Developer Key Skills</h1>
+        <p>A complete guide for junior, mid-level, and senior developers</p>
+    </header>
+
+    <nav>
+        <a href="#core">Core Python</a>
+        <a href="#web">Web Development</a>
+        <a href="#devops">DevOps</a>
+        <a href="#soft">Soft Skills</a>
+    </nav>
+
+    <div class="container">
+        <section id="core">
+            <h2>Core Python Skills</h2>
+            <div class="skills">
+                <div class="skill-card">
+                    <h3>Language Fundamentals</h3>
+                    <p>Data types, loops, functions, classes, decorators, generators.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>OOP & Design Patterns</h3>
+                    <p>Inheritance, polymorphism, Singleton, Factory, Observer, etc.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Data Structures & Algorithms</h3>
+                    <p>Lists, dicts, sets, stacks, queues, sorting, searching.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="web">
+            <h2>Web Development</h2>
+            <div class="skills">
+                <div class="skill-card">
+                    <h3>Django & Flask</h3>
+                    <p>ORM, REST APIs, templates, async programming, authentication.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Databases</h3>
+                    <p>MySQL, PostgreSQL, MongoDB, Redis, SQL optimization.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Frontend Integration</h3>
+                    <p>Serving static files, templates, and integrating JS frameworks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="devops">
+            <h2>DevOps & Deployment</h2>
+            <div class="skills">
+                <div class="skill-card">
+                    <h3>Servers & Hosting</h3>
+                    <p>Gunicorn, Nginx, Apache, Linux commands, VPS setup.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Docker & CI/CD</h3>
+                    <p>Containerization, Docker Compose, GitHub Actions, Jenkins pipelines.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Cloud</h3>
+                    <p>AWS, GCP, Azure deployment, monitoring, scaling.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="soft">
+            <h2>Soft Skills</h2>
+            <div class="skills">
+                <div class="skill-card">
+                    <h3>Problem Solving</h3>
+                    <p>Analytical thinking, debugging, and writing maintainable code.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Communication</h3>
+                    <p>Team collaboration, code reviews, and clear documentation.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Continuous Learning</h3>
+                    <p>Learning new libraries, frameworks, and staying updated.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2025 Python Developer Skills Guide
+    </footer>
+</body>
+</html>
