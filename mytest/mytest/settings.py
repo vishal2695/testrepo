@@ -215,39 +215,45 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     },
 # }
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+
     'formatters': {
         'verbose': {
-            'format': '[{asctime}] [{levelname}] [{name}:{lineno}] {message}',
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
             'style': '{',
         },
     },
+
     'handlers': {
-        'request_file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': BASE_DIR / 'logs' / 'django_requests.log',
-            'maxBytes': 5*1024*1024,  # 5 MB
-            'backupCount': 5,
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
             'formatter': 'verbose',
         },
     },
+
     'loggers': {
-        'django_request': {
-            'handlers': ['request_file'],
-            'level': 'INFO',
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'ERROR',
             'propagate': False,
         },
-    },
+    }
 }
-
-LOGGING['loggers'].update({
-    'django': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-        'propagate': True,
-    },
-})
