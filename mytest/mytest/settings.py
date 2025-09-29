@@ -48,6 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Custom request logging middleware
+    'myapp.middleware.RequestLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'mytest.urls'
@@ -146,3 +149,105 @@ MEDIA_ROOT = '/var/www/mytestnew/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# # Ensure logs directory exists
+# LOG_DIR = BASE_DIR / 'logs'
+# LOG_DIR.mkdir(exist_ok=True)
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '[{asctime}] [{levelname}] [{name}:{lineno}] {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '[{levelname}] {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         # Django INFO logs
+#         'django_file': {
+#             'level': 'INFO',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': LOG_DIR / 'django_info.log',
+#             'maxBytes': 5*1024*1024,  # 5 MB
+#             'backupCount': 5,
+#             'formatter': 'verbose',
+#         },
+#         # Django ERROR logs
+#         'django_error_file': {
+#             'level': 'ERROR',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': LOG_DIR / 'django_error.log',
+#             'maxBytes': 5*1024*1024,
+#             'backupCount': 5,
+#             'formatter': 'verbose',
+#         },
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple',
+#         },
+#     },
+#     'loggers': {
+#         # Django default logger
+#         'django': {
+#             'handlers': ['django_file', 'django_error_file', 'console'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#         # Django request logger for errors
+#         'django.request': {
+#             'handlers': ['django_error_file'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#         # Your apps can use this logger
+#         'myapp': {
+#             'handlers': ['django_file', 'console'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     },
+# }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] [{levelname}] [{name}:{lineno}] {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'request_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / 'logs' / 'django_requests.log',
+            'maxBytes': 5*1024*1024,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django_request': {
+            'handlers': ['request_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+LOGGING['loggers'].update({
+    'django': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+        'propagate': True,
+    },
+})
