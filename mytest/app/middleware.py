@@ -1,25 +1,26 @@
+# myapp/middleware.py
 import logging
-from django.utils.deprecation import MiddlewareMixin
+import time
 
-logger = logging.getLogger('django_request')  # Use a separate logger for requests
+logger = logging.getLogger("django.request")
 
-class RequestLoggingMiddleware(MiddlewareMixin):
-    def process_request(self, request):
-        user = getattr(request, 'user', None)
-        user_str = user.username if user and user.is_authenticated else 'Anonymous'
-        ip = self.get_client_ip(request)
+class RequestLoggingMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        start_time = time.time()
+
+        response = self.get_response(request)
+
+        duration = round(time.time() - start_time, 4)
+        method = request.method
+        path = request.get_full_path()
+        status = response.status_code
+        ip = request.META.get("REMOTE_ADDR")
 
         logger.info(
-            f"User: {user_str} | "
-            f"Method: {request.method} | "
-            f"Path: {request.get_full_path()} | "
-            f"IP: {ip}"
+            f"{method} {path} | Status: {status} | Duration: {duration}s | IP: {ip}"
         )
 
-    def get_client_ip(self, request):
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
+        return response
