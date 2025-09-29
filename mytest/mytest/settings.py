@@ -132,12 +132,13 @@ USE_TZ = True
 
 # STATIC_URL = 'static/'
 STATIC_URL = 'static/'
-STATIC_ROOT = '/home/ubuntu/project/testrepo/mytest/static/'
+STATIC_ROOT = '/var/www/mytestnew/static/'
+# STATIC_ROOT = '/home/ubuntu/project/testrepo/mytest/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # MEDIA files (user uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/ubuntu/project/testrepo/mytest/media/'
+MEDIA_ROOT = '/var/www/mytestnew/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
