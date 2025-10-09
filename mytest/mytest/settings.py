@@ -232,3 +232,25 @@ LOGGING = {
         },
     },
 }
+
+
+
+# settings.py
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = "Asia/Kolkata"
+
+
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'say-hello-every-1-min': {
+        'task': 'myapp.tasks.test_task',
+        'schedule': crontab(minute='*/1'),
+        'args': ('Django User',),
+    },
+}
